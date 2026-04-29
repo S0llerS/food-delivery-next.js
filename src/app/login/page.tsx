@@ -11,10 +11,10 @@ const LoginPage = () => {
   const router = useRouter();
 
   if (status === "loading") {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
   if (status === "authenticated") {
-    router.push("/")
+    router.push("/");
   }
 
   return (
@@ -31,7 +31,7 @@ const LoginPage = () => {
           <p>Log into your account or create а new one using social buttons</p>
 
           <button
-            className="flex gap-4 p-4 ring-1 ring-orange-100 rounded-mb"
+            className="flex gap-4 p-4 ring-1 ring-orange-100 rounded-mb cursor-pointer"
             onClick={() => signIn("google")}
           >
             <Image
@@ -43,7 +43,7 @@ const LoginPage = () => {
             />
             <span>Sign in with Google</span>
           </button>
-          <button className="flex gap-4 p-4 ring-1 ring-blue-100 rounded-mb">
+          <button className="flex gap-4 p-4 ring-1 ring-blue-100 rounded-mb cursor-pointer">
             <Image
               src="/facebook.png"
               alt=""
