@@ -1,8 +1,16 @@
+"use client";
+
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const LoginPage = () => {
+  const { data, status } = useSession();
+
+  console.log("Data: ", data);
+  console.log("Status: ", status);
+
   return (
     <div className="p-4 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center">
       {/* BOX */}
@@ -16,12 +24,27 @@ const LoginPage = () => {
           <h1 className="font-bold text-xl xl:text-3xl">Welcome</h1>
           <p>Log into your account or create а new one using social buttons</p>
 
-          <button className="flex gap-4 p-4 ring-1 ring-orange-100 rounded-mb">
-            <Image src="/google.png" alt="" width={20} height={20} className="object-contain" />
+          <button
+            className="flex gap-4 p-4 ring-1 ring-orange-100 rounded-mb"
+            onClick={() => signIn("google")}
+          >
+            <Image
+              src="/google.png"
+              alt=""
+              width={20}
+              height={20}
+              className="object-contain"
+            />
             <span>Sign in with Google</span>
           </button>
           <button className="flex gap-4 p-4 ring-1 ring-blue-100 rounded-mb">
-            <Image src="/facebook.png" alt="" width={20} height={20} className="object-contain" />
+            <Image
+              src="/facebook.png"
+              alt=""
+              width={20}
+              height={20}
+              className="object-contain"
+            />
             <span>Sign in with Facebook</span>
           </button>
 
