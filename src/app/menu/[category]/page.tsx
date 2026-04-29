@@ -1,12 +1,34 @@
-import { pizzas } from "@/data";
+import { ProductType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const CategoryPage = () => {
+const getData = async (category: string) => {
+  const res = await fetch(
+    `http://localhost:3000/api/products?cat=${category}`,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed!");
+  }
+
+  return res.json();
+};
+
+type Props = {
+  params: Promise<{ category: string }>;
+};
+
+const CategoryPage = async ({ params }: Props) => {
+  const { category } = await params;
+  const products: ProductType[] = await getData(category);
+
   return (
     <div className="flex flex-wrap text-green-500">
-      {pizzas.map((item) => (
+      {products.map((item) => (
         <Link
           href={`/product/${item.id}`}
           key={item.id}
@@ -15,7 +37,12 @@ const CategoryPage = () => {
           {/* IMAGE CONTAINER */}
           {item.img && (
             <div className="relative h-[80%]">
-              <Image src={item.img} alt="" fill className="object-contain hover:rotate-3 transition-all duration-400" />
+              <Image
+                src={item.img}
+                alt=""
+                fill
+                className="object-contain hover:rotate-3 transition-all duration-400"
+              />
             </div>
           )}
           {/* TEXT CONTAINER */}
