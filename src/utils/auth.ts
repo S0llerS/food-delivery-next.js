@@ -11,9 +11,6 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_SECRET!,
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
 };
 
 export const getAuthSession = () => getServerSession(authOptions);

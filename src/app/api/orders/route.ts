@@ -1,10 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-// FETCH ALL PRODUCTS
+// FETCH ALL ORDERS
 export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const cat = searchParams.get("cat");
+
+  console.log("CATEGORY IS: ", cat);
 
   try {
     const products = await prisma.product.findMany({
