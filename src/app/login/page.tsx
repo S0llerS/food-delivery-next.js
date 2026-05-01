@@ -31,7 +31,7 @@ const LoginPage = () => {
           <p>Log into your account or create а new one using social buttons</p>
 
           <button
-            className="flex gap-4 p-4 ring-1 ring-orange-100 rounded-mb cursor-pointer"
+            className="flex gap-4 p-4 ring-1 ring-orange-100 rounded-mb cursor-pointer hover:bg-orange-100 duration-200"
             onClick={() => signIn("google")}
           >
             <Image
@@ -43,7 +43,7 @@ const LoginPage = () => {
             />
             <span>Sign in with Google</span>
           </button>
-          <button className="flex gap-4 p-4 ring-1 ring-blue-100 rounded-mb cursor-pointer">
+          <button className="flex gap-4 p-4 ring-1 ring-blue-100 rounded-mb cursor-pointer hover:bg-blue-100 duration-200">
             <Image
               src="/facebook.png"
               alt=""
