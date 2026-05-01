@@ -5,24 +5,19 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-// UPDATE SINGLE ORDER
-export const PUT = async (req: NextRequest, { params }: Props) => {
+// GET SINGLE PRODUCT
+export const GET = async (req: NextRequest, { params }: Props) => {
   const { id } = await params;
 
   try {
-    const body = await req.json();
-
-    await prisma.order.update({
+    const product = await prisma.product.findUnique({
       where: {
         id: id,
       },
-      data: { status: body },
     });
-
-    return new NextResponse(
-      JSON.stringify({ message: "Order has been updated!" }),
-      { status: 200 },
-    );
+    return new NextResponse(JSON.stringify(product), {
+      status: 200,
+    });
   } catch (err) {
     console.log(err);
     return new NextResponse(

@@ -1,9 +1,9 @@
-import React from 'react'
-import Menu from './Menu'
-import Link from 'next/link'
-import CartIcon from './CartIcon';
-import Image from 'next/image';
-import UserLinks from './UserLinks';
+import React from "react";
+import Menu from "./Menu";
+import Link from "next/link";
+import CartIcon from "./CartIcon";
+import Image from "next/image";
+import UserLinks from "./UserLinks";
 
 const Navbar = () => {
   const user = false;
@@ -34,12 +34,11 @@ const Navbar = () => {
           <span>0987987</span>
         </div>
 
-        <UserLinks/>
-
+        <UserLinks />
         <CartIcon />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
