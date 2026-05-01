@@ -1,25 +1,34 @@
 import { prisma } from "@/lib/prisma";
+import { getAuthSession } from "@/utils/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 // FETCH ALL ORDERS
 export const GET = async (req: NextRequest) => {
-  const { searchParams } = new URL(req.url);
-  const cat = searchParams.get("cat");
+  const session = await getAuthSession();
+  if (session) {
+    try {
+      if (session.user.isAdmin) {
+        const orders = prisma.order.findMany();
+        return new NextResponse(JSON.stringify(orders), { status: 200 });
+      }
 
-  console.log("CATEGORY IS: ", cat);
-
-  try {
-    const products = await prisma.product.findMany({
-      where: {
-        ...(cat ? { catSlug: cat } : { isFeatured: true }),
-      },
-    });
-    return new NextResponse(JSON.stringify(products), { status: 200 });
-  } catch (err) {
-    console.log(err);
+      const orders = prisma.order.findMany({
+        where: {
+          userEmail: session.user.email!,
+        },
+      });
+      return new NextResponse(JSON.stringify(orders), { status: 200 });
+    } catch (err) {
+      console.log(err);
+      return new NextResponse(
+        JSON.stringify({ message: "Something went wrong!" }),
+        { status: 500 },
+      );
+    }
+  } else {
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }),
-      { status: 500 },
+      JSON.stringify({ message: "You are not authenticated!" }),
+      { status: 401 },
     );
   }
 };
