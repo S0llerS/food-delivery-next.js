@@ -2,7 +2,7 @@
 
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import CheckoutForm from "@/components/CheckoutForm";
 
 const stripePromise = loadStripe(
@@ -13,10 +13,10 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-const PayPage = async ({ params }: Props) => {
+const PayPage = ({ params }: Props) => {
   const [clientSecret, setClientSecret] = useState("");
 
-  const { id } = await params;
+  const { id } = use(params);
 
   useEffect(() => {
     const makeRequest = async () => {

@@ -1,18 +1,19 @@
 import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ orderId: string }>;
 };
 
-export const POST = async ({ params }: Props) => {
-  const { id } = await params;
+export const POST = async (req: NextRequest, { params }: Props) => {
+  const { orderId } = await params;
+  console.log("123123123123 ORDER ID: ", orderId);
 
   const order = await prisma.order.findUnique({
     where: {
-      id: id,
+      id: orderId,
     },
   });
 
@@ -28,7 +29,7 @@ export const POST = async ({ params }: Props) => {
 
     await prisma.order.update({
       where: {
-        id: id,
+        id: orderId,
       },
       data: { intent_id: paymentIntent.id },
     });

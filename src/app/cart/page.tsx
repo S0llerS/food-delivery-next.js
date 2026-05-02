@@ -86,7 +86,7 @@ const CartPage = () => {
           <span className="font-bold">${totalPrice}</span>
         </div>
         <button
-          className="bg-green-500 text-white p-3 rounded-md w-1/2 self-end"
+          className="bg-green-500 text-white p-3 rounded-md w-1/2 self-end cursor-pointer hover:bg-green-600 duration-200"
           onClick={handleCheckout}
         >
           CHECKOUT
