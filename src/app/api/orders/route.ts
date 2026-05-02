@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 // FETCH ALL ORDERS
 export const GET = async (req: NextRequest) => {
   const session = await getAuthSession();
+
   if (session) {
     try {
       if (session.user.isAdmin) {
@@ -33,6 +34,31 @@ export const GET = async (req: NextRequest) => {
   }
 };
 
-export const POST = () => {
-  return new NextResponse("Hello", { status: 200 });
+// CREATE ORDER
+export const POST = async (req: NextRequest) => {
+  const session = await getAuthSession();
+
+  if (session) {
+    try {
+      const body = await req.json()
+
+      if (session.user) {
+        const order = await prisma.order.create({
+          data: body
+        });
+        return new NextResponse(JSON.stringify(order), { status: 201 });
+      }
+    } catch (err) {
+      console.log(err);
+      return new NextResponse(
+        JSON.stringify({ message: "Something went wrong!" }),
+        { status: 500 },
+      );
+    }
+  } else {
+    return new NextResponse(
+      JSON.stringify({ message: "You are not authenticated!" }),
+      { status: 401 },
+    );
+  }
 };
