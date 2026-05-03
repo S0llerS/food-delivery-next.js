@@ -33,6 +33,7 @@ export const POST = async (req: NextRequest, { params }: Props) => {
       },
       data: { intent_id: paymentIntent.id },
     });
+    console.log("CONFIRM INTENT ID: ", paymentIntent);
 
     return new NextResponse(
       JSON.stringify({ clientSecret: paymentIntent.client_secret }),
