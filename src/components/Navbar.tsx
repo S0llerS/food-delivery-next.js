@@ -36,6 +36,8 @@ const Navbar = () => {
 
         <UserLinks />
         <CartIcon />
+
+        <Link href="/add">Add</Link>
       </div>
     </div>
   );
