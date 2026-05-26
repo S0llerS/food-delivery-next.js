@@ -1,9 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 const SuccessPage = () => {
+  const t = useTranslations("Success")
+
   const searchParams = useSearchParams();
   const payment_intent = searchParams.get("payment_intent");
   const router = useRouter();
@@ -24,8 +27,7 @@ const SuccessPage = () => {
 
   return (
     <div>
-      Payment successful. You are being redirected to the orders page. Please do
-      not close the page.
+      {t("message")}
     </div>
   );
 };

@@ -2,10 +2,13 @@
 
 import { ProductType } from "@/types/types";
 import { useCartStore } from "@/utils/store";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Price = ({ product }: { product: ProductType }) => {
+  const t = useTranslations("Product")
+
   const [total, setTotal] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
@@ -62,7 +65,7 @@ const Price = ({ product }: { product: ProductType }) => {
       <div className="flex justify-between items-center">
         {/* QUANTITY */}
         <div className="flex justify-between w-full p-3 ring-1 ring-green-500">
-          <span>Quantity</span>
+          <span>{t("quantity")}</span>
           <div className="flex gap-4 items-center">
             <button
               className="cursor-pointer"
@@ -84,7 +87,7 @@ const Price = ({ product }: { product: ProductType }) => {
           className="uppercase w-56 bg-green-500 text-white p-3 ring-1 ring-green-500 cursor-pointer"
           onClick={handleCart}
         >
-          Add to Cart
+          {t("add_to_cart")}
         </button>
       </div>
     </div>

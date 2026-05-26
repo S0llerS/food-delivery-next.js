@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,6 +20,8 @@ type Option = {
 };
 
 const AddPage = () => {
+  const t = useTranslations("Add");
+
   const { data: session, status } = useSession();
   const [inputs, setInputs] = useState<Inputs>({
     title: "",
@@ -71,11 +74,14 @@ const AddPage = () => {
     data.append("file", file!);
     data.append("upload_preset", "restaurant");
 
-    const res = await fetch("https://api.cloudinary.com/v1_1/da3bv4pae/image/upload", {
-      method: "POST",
-      // headers: { "Content-Type": "multipart/form-data" },
-      body: data,
-    });
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/da3bv4pae/image/upload",
+      {
+        method: "POST",
+        // headers: { "Content-Type": "multipart/form-data" },
+        body: data,
+      },
+    );
 
     const resData = await res.json();
     return resData.url;
@@ -109,7 +115,7 @@ const AddPage = () => {
     <div className="p-4 lg:px-20 xl:px-40 flex items-center justify-center text-green-500">
       <form className="flex flex-wrap gap-6" onSubmit={handleSubmit}>
         <h1 className="text-4xl mb-2 text-gray-600 font-bold">
-          Add New Product
+          {t("add_new_product")}
         </h1>
 
         <div className="w-full flex flex-col gap-2 ring-1 p-2 rounded-sm">
@@ -118,7 +124,7 @@ const AddPage = () => {
             htmlFor="file"
           >
             <Image src="/upload.png" alt="" width={30} height={20} />
-            <span>Upload Image</span>
+            <span>{t("upload_image")}</span>
           </label>
           <input
             className="hidden"
@@ -128,7 +134,7 @@ const AddPage = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label className="text-sm">Title</label>
+          <label className="text-sm">{t("title")}</label>
           <input
             onChange={handleChange}
             className="ring-1 ring-green-400 p-2 rounded-sm"
@@ -138,7 +144,7 @@ const AddPage = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label>Desc</label>
+          <label>{t("desc")}</label>
           <textarea
             onChange={handleChange}
             className="ring-1 ring-green-400 p-2 rounded-sm"
@@ -147,7 +153,7 @@ const AddPage = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label>Price</label>
+          <label>{t("price")}</label>
           <input
             onChange={handleChange}
             className="ring-1 ring-green-400 p-2 rounded-sm"
@@ -157,7 +163,7 @@ const AddPage = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label>Category</label>
+          <label>{t("category")}</label>
           <input
             onChange={handleChange}
             className="ring-1 ring-green-400 p-2 rounded-sm"
@@ -168,7 +174,7 @@ const AddPage = () => {
         </div>
 
         <div className="w-full flex flex-col gap-2">
-          <label>Options</label>
+          <label>{t("options")}</label>
           <div className="flex gap-1">
             <input
               onChange={changeOption}
@@ -189,7 +195,7 @@ const AddPage = () => {
               className="bg-gray-500 p-2 text-white rounded-sm hover:bg-gray-700 duration-100 cursor-pointer"
               onClick={() => setOptions((prev) => [...prev, option])}
             >
-              Add Option
+              {t("add_option")}
             </div>
           </div>
 
@@ -215,7 +221,7 @@ const AddPage = () => {
           type="submit"
           className="bg-green-500 p-4 text-white w-48 rounded-md relative h-14 flex items-center justify-center hover:bg-green-700 duration-100 cursor-pointer"
         >
-          Submit
+          {t("submit")}
         </button>
       </form>
     </div>

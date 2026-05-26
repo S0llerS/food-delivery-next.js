@@ -4,17 +4,26 @@ import Link from "next/link";
 import CartIcon from "./CartIcon";
 import Image from "next/image";
 import UserLinks from "./UserLinks";
+import { useTranslations } from "next-intl";
+import LangMenu from "./LangMenu";
 
 const Navbar = () => {
+  const t = useTranslations("Navbar");
+
   const user = false;
 
   return (
     <div className="h-12 text-green-500 p-4 flex items-center justify-between border-b-2 border-b-green-500 uppercase md:h-24 lg:px-20 xl:px-40">
       {/* LEFT LINKS */}
-      <div className="hidden md:flex gap-4 flex-1">
-        <Link href="/">Homepage</Link>
-        <Link href="/menu">Menu</Link>
-        <Link href="/">Contact</Link>
+      <div className="hidden md:flex gap-4 flex-2">
+        <Link href="/">{t("homepage")}</Link>
+        <Link href="/menu">{t("menu")}</Link>
+        <Link href="/">{t("contact")}</Link>
+
+        <div className="md:absolute top-3 r-2 lg:static flex items-center gap-2 cursor-pointer bg-lime-200 px-1 rounded-md">
+          <Image src="/phone.png" alt="" width={20} height={20} />
+          <span>0987987</span>
+        </div>
       </div>
 
       {/* LOGO */}
@@ -28,16 +37,13 @@ const Navbar = () => {
       </div>
 
       {/* RIGHT LINKS */}
-      <div className="hidden md:flex gap-4 items-center justify-end flex-1">
-        <div className="md:absolute top-3 r-2 lg:static flex items-center gap-2 cursor-pointer bg-lime-200 px-1 rounded-md">
-          <Image src="/phone.png" alt="" width={20} height={20} />
-          <span>0987987</span>
-        </div>
-
+      <div className="hidden md:flex gap-4 items-center justify-end flex-2">
         <UserLinks />
         <CartIcon />
 
-        <Link href="/add">Add</Link>
+        <Link href="/add">{t("add")}</Link>
+
+        <LangMenu />
       </div>
     </div>
   );

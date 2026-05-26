@@ -1,27 +1,29 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const data = [
   {
     id: 1,
-    title: "get stronger each time",
+    title: "slide_1",
     image: "/images/slide1.jpg",
   },
   {
     id: 2,
-    title: "delivery everywhere",
+    title: "slide_2",
     image: "/images/slide2.avif",
   },
   {
     id: 3,
-    title: "eat healthy & be happy",
+    title: "slide_3",
     image: "/images/slide3.avif",
   },
 ];
 
 const Slider = () => {
+  const t = useTranslations("App")
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -38,9 +40,9 @@ const Slider = () => {
       {/* TEXT CONTAINER */}
       <div className="flex-1 flex items-center justify-center flex-col gap-2 text-green-500 font-bold">
         <h1 className="text-5xl h-1/2 flex items-center justify-center text-center uppercase p-4 md:p-10 md:text-6xl xl:text-7xl">
-          {data[currentSlide].title}
+          {t(data[currentSlide].title)}
         </h1>
-        <button className="bg-green-500 text-white py-4 px-8">Order Now</button>
+        <button className="bg-green-500 text-white py-4 px-8">{t("order_now")}</button>
       </div>
       {/* IMAGE CONTAINER */}
       <div className="flex-1 relative">

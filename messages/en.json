@@ -1,0 +1,70 @@
+{
+  "App": {
+    "order_now": "Order Now",
+    "slide_1": "get stronger each time",
+    "slide_2": "delivery everywhere",
+    "slide_3": "eat healthy & be happy",
+    "add_to_cart": "Add to Cart",
+    "offer_title": "Limited Protein Snack",
+    "offer_desc": "Overloaded with protein so much that anyone who tries it is going to become Gigachad instantly."
+  },
+  "Notification": {
+    "notification": "Free delivery for all orders over €50. Order your food now!"
+  },
+  "Navbar": {
+    "homepage": "Homepage",
+    "menu": "Menu",
+    "contact": "Contact",
+    "add": "Add",
+    "orders": "Orders",
+    "logout": "Logout",
+    "login": "Login",
+    "cart": "Cart",
+    "language": "Language"
+  },
+  "Add": {
+    "add_new_product": "Add New Product",
+    "upload_image": "Upload Image",
+    "title": "Title",
+    "desc": "Description",
+    "price": "Price",
+    "category": "Category",
+    "options": "Options",
+    "add_option": "Add Option",
+    "submit": "Submit"
+  },
+  "Cart": {
+    "total_items": "Total items",
+    "service_cost": "Service Cost",
+    "delivery_cost": "Delivery Cost",
+    "free": "FREE!",
+    "total": "TOTAL(INCL. VAT)",
+    "checkout": "CHECKOUT"
+  },
+  "Login": {
+    "welcome": "Welcome",
+    "hint": "Log into your account or create а new one using social buttons",
+    "sign_google": "Sign in with Google",
+    "sign_facebook": "Sign in with Facebook",
+    "have_a_problem": "Have a problem?",
+    "contact_us": "Contact us"
+  },
+  "Menu": {
+    "explore": "Explore",
+    "add_to_cart": "Add to Cart"
+  },
+  "Orders": {
+    "order_id": "Order ID",
+    "date": "Date",
+    "price": "Price",
+    "products": "Products",
+    "status": "Status"
+  },
+  "Product": {
+    "quantity": "Quantity",
+    "add_to_cart": "Add to Cart"
+  },
+  "Success": {
+    "message": "Payment successful. You are being redirected to the orders page. Please do not close the page."
+  }
+}

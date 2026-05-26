@@ -1,12 +1,15 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 const LoginPage = () => {
+  const t = useTranslations("Login")
+
   const { data, status } = useSession();
   const router = useRouter();
 
@@ -27,8 +30,8 @@ const LoginPage = () => {
         </div>
         {/* FORM CONTAINER */}
         <div className="p-10 flex flex-col gap-8 md:w-1/2">
-          <h1 className="font-bold text-xl xl:text-3xl">Welcome</h1>
-          <p>Log into your account or create а new one using social buttons</p>
+          <h1 className="font-bold text-xl xl:text-3xl">{t("welcome")}</h1>
+          <p>{t("hint")}</p>
 
           <button
             className="flex gap-4 p-4 ring-1 ring-orange-100 rounded-mb cursor-pointer hover:bg-orange-100 duration-200"
@@ -41,7 +44,7 @@ const LoginPage = () => {
               height={20}
               className="object-contain"
             />
-            <span>Sign in with Google</span>
+            <span>{t("sign_google")}</span>
           </button>
           <button className="flex gap-4 p-4 ring-1 ring-blue-100 rounded-mb cursor-pointer hover:bg-blue-100 duration-200">
             <Image
@@ -51,13 +54,13 @@ const LoginPage = () => {
               height={20}
               className="object-contain"
             />
-            <span>Sign in with Facebook</span>
+            <span>{t("sign_facebook")}</span>
           </button>
 
           <p className="text-sm">
-            Have a problem?{" "}
+            {t("have_a_problem")}{" "}
             <Link href="/" className="underline">
-              Contact us
+              {t("contact_us")}
             </Link>
           </p>
         </div>

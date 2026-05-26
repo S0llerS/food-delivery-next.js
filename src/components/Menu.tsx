@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import CartIcon from './CartIcon';
+import { useTranslations } from 'next-intl';
 
 const links = [
   { id: 1, title: "Homepage", url: "/" },
@@ -13,6 +14,7 @@ const links = [
 ];
 
 const Menu = () => {
+  // const t = useTranslations("")
   const [open, setOpen] = useState(false);
 
   // TEMPORARY

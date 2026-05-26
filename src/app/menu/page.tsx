@@ -1,4 +1,5 @@
 import { MenuType } from "@/types/types";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import React from "react";
 
@@ -15,6 +16,7 @@ const getData = async () => {
 };
 
 const MenuPage = async () => {
+  const t = await getTranslations("Menu");
   const menu: MenuType = await getData();
 
   return (
@@ -32,7 +34,7 @@ const MenuPage = async () => {
             <button
               className={`hidden 2xl:block bg-${category.color} text-${category.color === "black" ? "white" : "green-500"} py-2 px-4 rounded-md font-bold cursor-pointer`}
             >
-              Explore
+              {t("explore")}
             </button>
           </div>
         </Link>

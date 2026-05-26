@@ -1,4 +1,5 @@
 import { ProductType } from "@/types/types";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import React from "react";
 
@@ -15,6 +16,8 @@ const getData = async () => {
 };
 
 const Featured = async () => {
+  const t = await getTranslations("App")
+
   const featuredProducts: ProductType[] = await getData();
 
   return (
@@ -41,7 +44,7 @@ const Featured = async () => {
               <p className="p-4 2xl:p-8">{item.desc}</p>
               <span className="text-xl font-bold">€{item.price}</span>
               <button className="bg-green-500 text-white p-2 rounded-md cursor-pointer">
-                Add to Cart
+                {t("add_to_cart")}
               </button>
             </div>
           </div>

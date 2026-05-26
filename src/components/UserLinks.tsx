@@ -1,22 +1,24 @@
 "use client";
 
 import { signOut, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 const UserLinks = () => {
+  const t = useTranslations("Navbar");
   const { status } = useSession();
 
   return (
     <div>
       {status === "authenticated" ? (
         <div>
-          <Link href="/orders">Orders</Link>
+          <Link href="/orders">{t("orders")}</Link>
           <span className="ml-4 cursor-pointer" onClick={() => signOut()}>
-            Logout
+            {t("logout")}
           </span>
         </div>
       ) : (
-        <Link href="/login">Login</Link>
+        <Link href="/login">{t("login")}</Link>
       )}
     </div>
   );

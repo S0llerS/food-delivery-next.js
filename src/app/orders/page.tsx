@@ -3,12 +3,15 @@
 import { OrderType } from "@/types/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 
 const OrdersPage = () => {
+  const t = useTranslations("Orders");
+
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -57,16 +60,19 @@ const OrdersPage = () => {
       <table className="w-full border-separate border-spacing-3">
         <thead>
           <tr className="text-left">
-            <th className="hidden md:block">Order ID</th>
-            <th>Date</th>
-            <th>Price</th>
-            <th className="hidden md:block">Products</th>
-            <th>Status</th>
+            <th className="hidden md:block">{t("order_id")}</th>
+            <th>{t("date")}</th>
+            <th>{t("price")}</th>
+            <th className="hidden md:block">{t("products")}</th>
+            <th>{t("status")}</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item: OrderType) => (
-            <tr className={`${item.status !== "Delivered" && "bg-green-50"} text-sm md:text-base`} key={item.id}>
+            <tr
+              className={`${item.status !== "Delivered" && "bg-green-50"} text-sm md:text-base`}
+              key={item.id}
+            >
               <td className="hidden md:block py-6 px-1">{item.id}</td>
               <td className="py-6 px-1">
                 {item.createdAt.toString().slice(0, 10)}

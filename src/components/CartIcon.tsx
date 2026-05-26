@@ -1,11 +1,13 @@
 "use client";
 
 import { useCartStore } from "@/utils/store";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
 const CartIcon = () => {
+  const t = useTranslations("Navbar");
   const { totalItems } = useCartStore();
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const CartIcon = () => {
       <div className="relative w-8 h-8 md:w-5 md:h-5">
         <Image src="/cart.png" alt="" fill />
       </div>
-      <span>Cart ({totalItems})</span>
+      <span>{t("cart")} ({totalItems})</span>
     </Link>
   );
 };
