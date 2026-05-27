@@ -1,5 +1,6 @@
 import { ProductType } from "@/types/types";
 import { getTranslations } from "next-intl/server";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import React from "react";
 
@@ -16,7 +17,10 @@ const getData = async () => {
 };
 
 const Featured = async () => {
-  const t = await getTranslations("App")
+  const t = await getTranslations("App");
+
+  const store = await cookies();
+  const locale = store.get("locale")?.value || "en";
 
   const featuredProducts: ProductType[] = await getData();
 
@@ -39,9 +43,9 @@ const Featured = async () => {
             {/* TEXT CONTAINER */}
             <div className="flex-1 flex flex-col items-center justify-center text-center gap-4">
               <h1 className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl">
-                {item.title}
+                {JSON.parse(item.title)[locale]}
               </h1>
-              <p className="p-4 2xl:p-8">{item.desc}</p>
+              <p className="p-4 2xl:p-8">{JSON.parse(item.desc!)[locale]}</p>
               <span className="text-xl font-bold">€{item.price}</span>
               <button className="bg-green-500 text-white p-2 rounded-md cursor-pointer">
                 {t("add_to_cart")}

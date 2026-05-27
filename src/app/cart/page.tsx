@@ -10,6 +10,9 @@ import React, { useEffect } from "react";
 const CartPage = () => {
   const t = useTranslations("Cart");
 
+  const match = document.cookie.match(/(^| )locale=([^;]+)/);
+  const locale = match ? decodeURIComponent(match[2]) : "en";
+
   const { products, totalItems, totalPrice, removeFromCart } = useCartStore();
   const { data: session } = useSession();
   const router = useRouter();
@@ -29,7 +32,7 @@ const CartPage = () => {
           body: JSON.stringify({
             price: totalPrice,
             products,
-            status: "Not Paid!",
+            status: "Paid!", // Not Paid
             userEmail: session.user.email,
           }),
         });
@@ -53,13 +56,13 @@ const CartPage = () => {
             )}
             <div className="">
               <h1 className="uppercase text-xl font-bold">
-                {item.title} x{item.quantity}
+                {JSON.parse(item.title)[locale]} x{item.quantity}
               </h1>
               <span>{item.optionTitle}</span>
             </div>
             <h2 className="font-bold">{item.price}€</h2>
             <span
-              className="cursor-pointer"
+              className="mx-2 text-red-500 cursor-pointer"
               onClick={() => removeFromCart(item)}
             >
               X
@@ -70,7 +73,9 @@ const CartPage = () => {
       {/* PAYMENT CONTAINER */}
       <div className="h-1/2 p-4 bg-lime-50 flex flex-col gap-4 justify-center lg:h-full lg:w-1/3 2xl:w-1/2 lg:px-20 xl:px-40 2xl:text-xl 2xl:gap-6">
         <div className="flex justify-between">
-          <span className="">{t("total_items")}: {totalItems}</span>
+          <span className="">
+            {t("total_items")}: {totalItems}
+          </span>
           <span className="">{totalPrice.toFixed(2)}€</span>
         </div>
         <div className="flex justify-between">

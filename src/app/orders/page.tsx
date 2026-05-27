@@ -12,6 +12,9 @@ import { toast } from "react-toastify";
 const OrdersPage = () => {
   const t = useTranslations("Orders");
 
+  const match = document.cookie.match(/(^| )locale=([^;]+)/);
+  const locale = match ? decodeURIComponent(match[2]) : 'en';
+
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -79,7 +82,7 @@ const OrdersPage = () => {
               </td>
               <td className="py-6 px-1">{item.price}</td>
               <td className="hidden md:block py-6 px-1">
-                {item.products[0].title}
+                {JSON.parse(item.products[0].title)[locale]}
               </td>
               {session?.user.isAdmin ? (
                 <td>

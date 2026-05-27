@@ -84,7 +84,7 @@ const Price = ({ product }: { product: ProductType }) => {
         </div>
         {/* CART BUTTON */}
         <button
-          className="uppercase w-56 bg-green-500 text-white p-3 ring-1 ring-green-500 cursor-pointer"
+          className="uppercase w-56 bg-green-500 text-white p-3 ring-1 ring-green-500 cursor-pointer rounded-md hover:bg-green-700 duration-200"
           onClick={handleCart}
         >
           {t("add_to_cart")}

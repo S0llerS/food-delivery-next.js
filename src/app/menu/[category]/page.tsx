@@ -1,5 +1,6 @@
 import { ProductType } from "@/types/types";
 import { getTranslations } from "next-intl/server";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -26,6 +27,9 @@ type Props = {
 const CategoryPage = async ({ params }: Props) => {
   const t = await getTranslations("Menu");
 
+  const store = await cookies();
+  const locale = store.get("locale")?.value || "en";
+
   const { category } = await params;
   const products: ProductType[] = await getData(category);
 
@@ -50,7 +54,7 @@ const CategoryPage = async ({ params }: Props) => {
           )}
           {/* TEXT CONTAINER */}
           <div className="flex items-center justify-between font-bold">
-            <h1 className="text-2xl uppercase p-2">{item.title}</h1>
+            <h1 className="text-2xl uppercase p-2">{JSON.parse(item.title)[locale]}</h1>
             <h2 className="group-hover:hidden text-xl">€{item.price}</h2>
             <button className="hidden group-hover:block uppercase bg-green-500 text-white p-2 rounded-md cursor-pointer hover:scale-105 hover:rotate-2 transition-all duration-200">
               {t("add_to_cart")}
