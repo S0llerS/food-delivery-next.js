@@ -2,6 +2,8 @@ import Image from "next/image";
 import React, { useTransition } from "react";
 import CountDown from "./CountDown";
 import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
+import OfferRequest from "./OfferRequest";
 
 const Offer = () => {
   const t = useTranslations("App");
@@ -13,9 +15,7 @@ const Offer = () => {
         <h1 className="text-5xl font-bold xl:text-6xl">{t("offer_title")}</h1>
         <p>{t("offer_desc")}</p>
         <CountDown />
-        <button className="bg-green-500 rounded-md py-3 px-6">
-          {t("order_now")}
-        </button>
+        <OfferRequest />
       </div>
       {/* IMAGE CONTAINER */}
       <div className="flex-1 w-full relative md:h-full">

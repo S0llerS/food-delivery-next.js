@@ -8,6 +8,9 @@ const LangMenu = () => {
   const t = useTranslations("Navbar");
   const [toggle, setToggle] = useState(false);
 
+  const match = document.cookie.match(/(^| )locale=([^;]+)/);
+  const currentLocale = match ? decodeURIComponent(match[2]) : 'en';
+
   const handleLang = (locale: string) => {
     document.cookie = `locale=${locale}; Path=/;`;
     window.location.reload();
@@ -16,7 +19,7 @@ const LangMenu = () => {
   return (
     <div className="">
       <Image
-        src="/lang/en.png"
+        src={`/lang/${currentLocale}.png`}
         alt=""
         width={48}
         height={48}

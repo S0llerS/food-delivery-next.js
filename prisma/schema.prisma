@@ -71,8 +71,8 @@ model VerificationToken {
 model Category {
   id        String    @id @default(dbgenerated("gen_random_uuid()"))
   createdAt DateTime  @default(now())
-  title     String
-  desc      String
+  title     Json
+  desc      Json
   color     String
   img       String
   slug      String    @unique
@@ -82,8 +82,8 @@ model Category {
 model Product {
   id         String   @id @default(dbgenerated("gen_random_uuid()"))
   createdAt  DateTime @default(now())
-  title      String
-  desc       String
+  title      Json
+  desc       Json
   img        String?
   price      Decimal
   isFeatured Boolean  @default(false)
